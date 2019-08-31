@@ -28,7 +28,7 @@ CONTEXT_SETTINGS = {
 @click.option("--github-app-id", help="GitHub App ID")
 @click.option("--github-app-private-key", help="GitHub App Private Key", type=click.Path(exists=True, dir_okay=False))
 @click.option("--github-app-secret", help="GitHub App Secret", required=True)
-@click.option("--port", help="Port of the server", default=443, show_default=True)
+@click.option("--port", help="Port of the server", default=80, show_default=True)
 @click.option("--sentry-dsn", help="Sentry DSN")
 def main(github_app_id, github_app_private_key, github_app_secret, port, sentry_dsn):
     sentry.setup_sentry(sentry_dsn)
