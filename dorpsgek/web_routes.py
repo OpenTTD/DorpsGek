@@ -20,6 +20,11 @@ async def github_handler(request):
         return web.HTTPInternalServerError()
 
 
+@routes.get('/healthz')
+async def healthz_handler(request):
+    return web.HTTPOk()
+
+
 @routes.route('*', '/{tail:.*}')
 async def fallback(request):
     log.warning('Unexpected URL: %s', request.url)
