@@ -66,7 +66,8 @@ async def push(event, github_api):
     commits = [
         {
             "message": commit["message"].split("\n")[0],
-            "author": commit["author"]["username"],
+            # Not always the 'username' is set; in those cases, fall back to 'name'
+            "author": commit["author"].get("username", commit["author"]["name"]),
         }
         for commit in event.data["commits"]
     ]
