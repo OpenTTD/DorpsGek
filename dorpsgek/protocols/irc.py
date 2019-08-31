@@ -70,6 +70,8 @@ async def push(channels, repository_name, url, user, branch, commits):
             channel,
             f"[{repository_name}] {user} pushed {commit_count} commits to {branch} {shortened_url}"
         )
+        for commit in commits:
+            irc_connection.privmsg(channel, f"  - {commit['message']} (by {commit['author']})")
 
 
 @protocols.register("irc", "issue")
