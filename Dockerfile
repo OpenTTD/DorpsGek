@@ -10,6 +10,7 @@ COPY requirements.txt \
         LICENSE \
         README.md \
         .version \
+        dorpsgek.ini \
         /code/
 COPY dorpsgek /code/dorpsgek
 
