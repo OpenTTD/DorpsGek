@@ -1,6 +1,8 @@
 aiohttp
+click
 cryptography
 gidgethub
 irc3
 pyjwt
 pyyaml
+sentry-sdk
