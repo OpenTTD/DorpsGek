@@ -1,0 +1,11 @@
+notifications:
+  global:
+    irc:
+    - openttd
+    - openttd.notice
+
+  push:
+    except:
+    - pyup-.*
+  pull-request:
+  issue:
