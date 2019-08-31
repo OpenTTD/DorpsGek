@@ -51,6 +51,10 @@ def filter_func(protocols, payload):
 async def push(event, github_api):
     global ignore_next_push_sha
 
+    # We don't announce created or deleted branches
+    if event.data["created"] or event.data["deleted"]:
+        return
+
     branch = event.data["ref"]
     repository_name = event.data["repository"]["full_name"]
 
