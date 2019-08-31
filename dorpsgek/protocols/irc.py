@@ -33,13 +33,11 @@ async def pull_request(channels, repository_name, url, user, action, pull_id, ti
     elif action == "comment":
         message = f"{user} commented on pull request #{pull_id}: {title}"
     elif action == "dismissed":
-        message = f"{user} dismissed a review for pull request #{pull_id}:" \
-                  f" {title}"
+        message = f"{user} dismissed a review for pull request #{pull_id}: {title}"
     elif action == "approved":
         message = f"{user} approved pull request #{pull_id}: {title}"
     elif action == "changes_requested":
-        message = f"{user} requested changes for pull request #{pull_id}:" \
-                  f" {title}"
+        message = f"{user} requested changes for pull request #{pull_id}: {title}"
     elif action == "commented":
         message = f"{user} commented on pull request #{pull_id}: {title}"
     else:
@@ -68,10 +66,10 @@ async def push(channels, repository_name, url, user, branch, commits):
             autojoins.join(channel)
 
         shortened_url = await shorten(url)
-        irc_connection.privmsg(channel,
-                               f"[{repository_name}] "
-                               f"{user} pushed {commit_count} commits to {branch} {shortened_url}"
-                               )
+        irc_connection.privmsg(
+            channel,
+            f"[{repository_name}] {user} pushed {commit_count} commits to {branch} {shortened_url}"
+        )
 
 
 @protocols.register("irc", "issue")
