@@ -9,6 +9,7 @@ WORKDIR /code
 COPY requirements.txt \
         LICENSE \
         README.md \
+        .version \
         /code/
 COPY dorpsgek /code/dorpsgek
 
