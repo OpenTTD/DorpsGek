@@ -14,12 +14,23 @@ def startup():
     irc_connection.run(forever=False)
 
 
-@protocols.register("irc", "pull-request")
-async def pull_request(channels, repository_name, url, user, action, pull_id, title):
+def _send_messages(channels, messages):
     channels = [f"#{c}" for c in channels]
 
     autojoins = irc_connection.get_plugin("irc3.plugins.autojoins.AutoJoins")
 
+    for channel in channels:
+        # Try to join the channel before we send a message
+        if channel not in autojoins.joined:
+            autojoins.join(channel)
+            autojoins.channels.append(channel)
+
+        for message in messages:
+            irc_connection.privmsg(channel, message)
+
+
+@protocols.register("irc", "pull-request")
+async def pull_request(channels, repository_name, url, user, action, pull_id, title):
     if action == "opened":
         message = f"{user} opened pull request #{pull_id}: {title}"
     elif action == "closed":
@@ -43,43 +54,23 @@ async def pull_request(channels, repository_name, url, user, action, pull_id, ti
     else:
         return
 
-    for channel in channels:
-        # Try to join the channel before we send a message
-        if channel not in autojoins.joined:
-            autojoins.join(channel)
-
-        shortened_url = await shorten(url)
-        irc_connection.privmsg(channel, f"[{repository_name}] {message} {shortened_url}")
+    shortened_url = await shorten(url)
+    _send_messages(channels, [f"[{repository_name}] {message} {shortened_url}"])
 
 
 @protocols.register("irc", "push")
 async def push(channels, repository_name, url, user, branch, commits):
-    channels = [f"#{c}" for c in channels]
-
-    autojoins = irc_connection.get_plugin("irc3.plugins.autojoins.AutoJoins")
-
     commit_count = len(commits)
 
-    for channel in channels:
-        # Try to join the channel before we send a message
-        if channel not in autojoins.joined:
-            autojoins.join(channel)
-
-        shortened_url = await shorten(url)
-        irc_connection.privmsg(
-            channel,
-            f"[{repository_name}] {user} pushed {commit_count} commits to {branch} {shortened_url}"
-        )
-        for commit in commits:
-            irc_connection.privmsg(channel, f"  - {commit['message']} (by {commit['author']})")
+    shortened_url = await shorten(url)
+    _send_messages(channels,
+        [f"[{repository_name}] {user} pushed {commit_count} commits to {branch} {shortened_url}"] +
+        [f"  - {commit['message']} (by {commit['author']})" for commit in commits]
+    )
 
 
 @protocols.register("irc", "issue")
 async def issue(channels, repository_name, url, user, action, issue_id, title):
-    channels = [f"#{c}" for c in channels]
-
-    autojoins = irc_connection.get_plugin("irc3.plugins.autojoins.AutoJoins")
-
     if action == "opened":
         message = f"{user} opened issue #{issue_id}: {title}"
     elif action == "reopened":
@@ -89,10 +80,5 @@ async def issue(channels, repository_name, url, user, action, issue_id, title):
     elif action == "comment":
         message = f"{user} commented on issue #{issue_id}: {title}"
 
-    for channel in channels:
-        # Try to join the channel before we send a message
-        if channel not in autojoins.joined:
-            autojoins.join(channel)
-
-        shortened_url = await shorten(url)
-        irc_connection.privmsg(channel, f"[{repository_name}] {message} {shortened_url}")
+    shortened_url = await shorten(url)
+    _send_messages(channels, [f"[{repository_name}] {message} {shortened_url}"])
