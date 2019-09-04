@@ -1,4 +1,3 @@
-from dorpsgek.events import push
 from dorpsgek.helpers import protocols
 from dorpsgek.helpers.github import router
 
@@ -21,7 +20,6 @@ async def pull_request(event, github_api):
 
     if payload["action"] == "closed" and event.data["pull_request"]["merged"]:
         payload["action"] = "merged"
-        push.ignore_next_push_sha = event.data["pull_request"]["merge_commit_sha"]
 
     ref = event.data["pull_request"]["base"]["ref"]
     await protocols.dispatch(github_api, repository_name, "pull-request", payload, ref=ref)

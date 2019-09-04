@@ -4,11 +4,6 @@ from dorpsgek.helpers import protocols
 from dorpsgek.helpers.github import router
 
 
-# If set to a sha, this sha will be ignored once if seen on a push.
-# Used to not show both a Pull Request merge as a Push about the PR.
-ignore_next_push_sha = None
-
-
 def filter_func(protocols, payload):
     # Filter based on some keywords
     for protocol, userdata in protocols.items():
@@ -49,19 +44,12 @@ def filter_func(protocols, payload):
 
 @router.register("push")
 async def push(event, github_api):
-    global ignore_next_push_sha
-
     # We don't announce created or deleted branches
     if event.data["created"] or event.data["deleted"]:
         return
 
     branch = event.data["ref"]
     repository_name = event.data["repository"]["full_name"]
-
-    # If we were asked to ignore this sha, do that once
-    if ignore_next_push_sha and event.data["after"] == ignore_next_push_sha:
-        ignore_next_push_sha = None
-        return
 
     commits = [
         {
