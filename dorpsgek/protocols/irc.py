@@ -83,3 +83,11 @@ async def issue(channels, repository_name, url, user, action, issue_id, title):
 
     shortened_url = await shorten(url)
     _send_messages(channels, [f"[{repository_name}] {message} {shortened_url}"])
+
+
+@protocols.register("irc", "commit-comment")
+async def commit_comment(channels, repository_name, url, user, message):
+    message = f"{user} left a comment on commit: {message}"
+
+    shortened_url = await shorten(url)
+    _send_messages(channels, [f"[{repository_name}] {message} {shortened_url}"])

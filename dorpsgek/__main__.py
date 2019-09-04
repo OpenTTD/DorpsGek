@@ -10,6 +10,7 @@ from dorpsgek.helpers import (
 
 # Import files that will hook themself up when imported
 from dorpsgek.events import (  # noqa
+    commit_comment,
     issue,
     pull_request,
     push,
