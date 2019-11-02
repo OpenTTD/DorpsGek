@@ -11,20 +11,15 @@ jobs:
     name: Flake8
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Flake8
-      uses: tayfun/flake8-your-pr@master
-      env:
-        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+    - uses: actions/checkout@v1
+    - uses: TrueBrain/actions-flake8@master
+      with:
+        path: dorpsgek
 
   docker:
     name: Docker
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+    - uses: actions/checkout@v1
     - name: Build
-      uses: actions/docker/cli@master
-      with:
-        args: build .
+      run: docker build .
