@@ -9,10 +9,12 @@ from dorpsgek.helpers.github import get_oauth_token
 log = logging.getLogger(__name__)
 
 
-async def get_dorpsgek_yml(github_api, repository, ref):
+async def get_dorpsgek_yml(github_api, repository):
     try:
-        response = await github_api.getitem(f"/repos/{repository}/contents/.dorpsgek.yml?ref={ref}",
-                                            oauth_token=await get_oauth_token(repository))
+        oauth_token = await get_oauth_token(repository)
+        # Always use .dorpsgek.yml from master
+        response = await github_api.getitem(f"/repos/{repository}/contents/.dorpsgek.yml?ref=master",
+                                            oauth_token=oauth_token)
     except gidgethub.BadRequest as err:
         # Check if there simply wasn't any .dorpsgek.yml in this repository
         if err.args == ("Not Found",):
@@ -29,7 +31,7 @@ async def get_notification_protocols(github_api, repository_name, ref, type):
     protocols["irc"].append("dorpsgek")
 
     try:
-        raw_yml = await get_dorpsgek_yml(github_api, repository_name, ref)
+        raw_yml = await get_dorpsgek_yml(github_api, repository_name)
     except Exception:
         log.exception("Couldn't parse .dorpsgek.yml in %s at ref %s", repository_name, ref)
         return protocols
