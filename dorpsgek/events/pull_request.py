@@ -38,7 +38,7 @@ async def issue_comment(event, github_api):
     # To not assume Pull Request are always against 'master',
     # we take an extra roundtrip to find the base branch
     pull_request_url = event.data["issue"]["pull_request"]["url"]
-    assert pull_request_url.startswith("https://api.github.com")
+    assert pull_request_url.startswith("https://api.github.com/")
     pull_request_url = pull_request_url[len("https://api.github.com"):]
     response = await github_api.getitem(pull_request_url)
 
