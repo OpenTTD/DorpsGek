@@ -7,19 +7,13 @@ on:
   pull_request:
 
 jobs:
-  flake8:
-    name: Flake8
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: TrueBrain/actions-flake8@master
-      with:
-        path: dorpsgek
-
   docker:
-    name: Docker
+    name: Docker build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Checkout submodules
+      uses: openttd/actions/checkout@v1
     - name: Build
       run: docker build .
