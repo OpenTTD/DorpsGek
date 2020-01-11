@@ -6,3 +6,4 @@ notifications:
 
   pull-request:
   issue:
+  tag-created:
