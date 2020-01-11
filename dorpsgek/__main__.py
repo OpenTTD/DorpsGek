@@ -1,3 +1,4 @@
+import base64
 import click
 import logging
 
@@ -27,11 +28,12 @@ CONTEXT_SETTINGS = {
 
 @click.command(context_settings=CONTEXT_SETTINGS)
 @click.option("--github-app-id", help="GitHub App ID")
-@click.option("--github-app-private-key", help="GitHub App Private Key", type=click.Path(exists=True, dir_okay=False))
+@click.option("--github-app-private-key", help="GitHub App Private Key")
+@click.option("--github-app-private-key-file", help="GitHub App Private Key", type=click.Path(exists=True, dir_okay=False))
 @click.option("--github-app-secret", help="GitHub App Secret", required=True)
 @click.option("--port", help="Port of the server", default=80, show_default=True)
 @click.option("--sentry-dsn", help="Sentry DSN")
-def main(github_app_id, github_app_private_key, github_app_secret, port, sentry_dsn):
+def main(github_app_id, github_app_private_key, github_app_private_key_file, github_app_secret, port, sentry_dsn):
     sentry.setup_sentry(sentry_dsn)
 
     logging.basicConfig(
@@ -41,9 +43,11 @@ def main(github_app_id, github_app_private_key, github_app_secret, port, sentry_
 
     github.GITHUB_APP_SECRET = github_app_secret
     github.GITHUB_APP_ID = github_app_id
-    if github_app_private_key:
-        with open(github_app_private_key, "rb") as fp:
+    if github_app_private_key_file:
+        with open(github_app_private_key_file, "rb") as fp:
             github.GITHUB_APP_PRIVATE_KEY = fp.read()
+    if github_app_private_key:
+        github.GITHUB_APP_PRIVATE_KEY = base64.b64decode(github_app_private_key)
 
     irc.startup()
 
