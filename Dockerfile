@@ -1,5 +1,13 @@
 FROM python:3.7-slim
 
+ARG BUILD_DATE=""
+ARG BUILD_VERSION="dev"
+
+LABEL maintainer="truebrain@openttd.org"
+LABEL org.label-schema.schema-version="1.0"
+LABEL org.label-schema.build-date=${BUILD_DATE}
+LABEL org.label-schema.version=${BUILD_VERSION}
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git \
     && rm -rf /var/lib/apt/lists/*
@@ -9,7 +17,6 @@ WORKDIR /code
 COPY requirements.txt \
         LICENSE \
         README.md \
-        .version \
         dorpsgek.ini \
         /code/
 COPY dorpsgek /code/dorpsgek
