@@ -65,8 +65,8 @@ async def push(channels, repository_name, url, user, branch, commits):
     shortened_url = await shorten(url)
     _send_messages(
         channels,
-        [f"[{repository_name}] {user} pushed {commit_count} commits to {branch} {shortened_url}"] +
-        [f"  - {commit['message']} (by {commit['author']})" for commit in commits]
+        [f"[{repository_name}] {user} pushed {commit_count} commits to {branch} {shortened_url}"]
+        + [f"  - {commit['message']} (by {commit['author']})" for commit in commits],
     )
 
 
@@ -96,10 +96,14 @@ async def commit_comment(channels, repository_name, url, user, message):
 @protocols.register("irc", "branch-created")
 async def ref_branch_created(channels, repository_name, url, user, name):
     shortened_url = await shorten(url)
-    _send_messages(channels, [f"[{repository_name}] {user} created new branch: {name} {shortened_url}"])
+    _send_messages(
+        channels, [f"[{repository_name}] {user} created new branch: {name} {shortened_url}"],
+    )
 
 
 @protocols.register("irc", "tag-created")
 async def ref_tag_created(channels, repository_name, url, user, name):
     shortened_url = await shorten(url)
-    _send_messages(channels, [f"[{repository_name}] {user} created new tag: {name} {shortened_url}"])
+    _send_messages(
+        channels, [f"[{repository_name}] {user} created new tag: {name} {shortened_url}"],
+    )

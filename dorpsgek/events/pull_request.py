@@ -39,7 +39,7 @@ async def issue_comment(event, github_api):
     # we take an extra roundtrip to find the base branch
     pull_request_url = event.data["issue"]["pull_request"]["url"]
     assert pull_request_url.startswith("https://api.github.com/")
-    pull_request_url = pull_request_url[len("https://api.github.com"):]
+    pull_request_url = pull_request_url[len("https://api.github.com") :]
     response = await github_api.getitem(pull_request_url)
 
     payload = {
@@ -71,7 +71,7 @@ async def pull_request_review(event, github_api):
     if payload["action"] == "submitted":
         payload["action"] = event.data["review"]["state"]
 
-    if payload["action"] not in ("dismissed", "approved", "commented", "changes_requested"):
+    if payload["action"] not in ("dismissed", "approved", "commented", "changes_requested",):
         return
 
     ref = event.data["pull_request"]["base"]["ref"]

@@ -32,4 +32,6 @@ async def dispatch(self, event, *args, **kwargs):
             await callback(event, *args, **kwargs)
         except Exception:
             log.exception("GitHub callback failed")
+
+
 routing.Router.dispatch = dispatch  # noqa

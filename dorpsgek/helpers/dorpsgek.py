@@ -13,8 +13,9 @@ async def get_dorpsgek_yml(github_api, repository):
     try:
         oauth_token = await get_oauth_token(repository)
         # Always use .dorpsgek.yml from master
-        response = await github_api.getitem(f"/repos/{repository}/contents/.dorpsgek.yml?ref=master",
-                                            oauth_token=oauth_token)
+        response = await github_api.getitem(
+            f"/repos/{repository}/contents/.dorpsgek.yml?ref=master", oauth_token=oauth_token,
+        )
     except gidgethub.BadRequest as err:
         # Check if there simply wasn't any .dorpsgek.yml in this repository
         if err.args == ("Not Found",):

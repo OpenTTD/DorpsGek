@@ -11,7 +11,7 @@ async def commit_comment(event, github_api):
 
     commits_url = event.data["repository"]["commits_url"]
     assert commits_url.startswith("https://api.github.com/")
-    commits_url = commits_url[len("https://api.github.com"):]
+    commits_url = commits_url[len("https://api.github.com") :]
     assert commits_url.endswith("{/sha}")
     commits_url = commits_url.replace("{/sha}", "/" + event.data["comment"]["commit_id"])
     response = await github_api.getitem(commits_url)

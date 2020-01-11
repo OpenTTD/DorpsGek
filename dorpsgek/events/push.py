@@ -70,7 +70,7 @@ async def push(event, github_api):
     if not branch.startswith("refs/heads/"):
         return
 
-    branch = branch[len("refs/heads/"):]
+    branch = branch[len("refs/heads/") :]
 
     payload = {
         "repository_name": repository_name,
