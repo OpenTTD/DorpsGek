@@ -15,8 +15,7 @@ def setup_sentry(sentry_dsn):
     # HOSTNAME is expected to be in form of 'environment-...'
     environment = os.getenv("HOSTNAME", "dev").split("-")[0]
 
-    sentry_sdk.init(
-        sentry_dsn,
-        release=release,
-        environment=environment)
-    log.info("Sentry initialized with release='%s' and environment='%s'", release, environment)
+    sentry_sdk.init(sentry_dsn, release=release, environment=environment)
+    log.info(
+        "Sentry initialized with release='%s' and environment='%s'", release, environment,
+    )

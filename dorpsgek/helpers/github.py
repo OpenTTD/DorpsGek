@@ -47,9 +47,9 @@ async def get_oauth_token(repository):
         if repository in _github_repositories:
             installation_id = _github_repositories[repository]
         else:
-            data = await github_api.getitem(f"/repos/{repository}/installation",
-                                            accept=accept_format(version="machine-man-preview"),
-                                            jwt=get_jwt())
+            data = await github_api.getitem(
+                f"/repos/{repository}/installation", accept=accept_format(version="machine-man-preview"), jwt=get_jwt(),
+            )
             installation_id = data["id"]
             _github_repositories[repository] = installation_id
 
@@ -59,10 +59,12 @@ async def get_oauth_token(repository):
             if expires_at > datetime.datetime.utcnow() + datetime.timedelta(minutes=5):
                 return oauth_token
 
-        data = await github_api.post(f"/installations/{installation_id}/access_tokens",
-                                     data="",
-                                     accept=accept_format(version="machine-man-preview"),
-                                     jwt=get_jwt())
+        data = await github_api.post(
+            f"/installations/{installation_id}/access_tokens",
+            data="",
+            accept=accept_format(version="machine-man-preview"),
+            jwt=get_jwt(),
+        )
 
         expires_at = datetime.datetime.strptime(data["expires_at"], "%Y-%m-%dT%H:%M:%SZ")
         _github_installations[installation_id] = (expires_at, data["token"])

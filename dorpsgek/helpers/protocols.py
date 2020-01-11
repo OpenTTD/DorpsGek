@@ -31,4 +31,5 @@ def register(name, type):
     def wrapped(func):
         _protocols[name][type] = func
         return func
+
     return wrapped
