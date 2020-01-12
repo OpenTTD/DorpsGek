@@ -3,6 +3,7 @@ import click
 import logging
 
 from aiohttp import web
+from aiohttp.web_log import AccessLogger
 from dorpsgek import web_routes
 from dorpsgek.helpers import (
     github,
@@ -22,6 +23,13 @@ from dorpsgek.protocols import irc  # noqa
 log = logging.getLogger(__name__)
 
 CONTEXT_SETTINGS = {"help_option_names": ["-h", "--help"]}
+
+
+class ErrorOnlyAccessLogger(AccessLogger):
+    def log(self, request, response, time):
+        # Only log if the status was not successful
+        if not (200 <= response.status < 400):
+            super().log(request, response, time)
 
 
 @click.command(context_settings=CONTEXT_SETTINGS)
@@ -63,7 +71,7 @@ def main(
 
     app = web.Application()
     app.add_routes(web_routes.routes)
-    web.run_app(app, port=port)
+    web.run_app(app, port=port, access_log_class=ErrorOnlyAccessLogger)
 
 
 if __name__ == "__main__":
