@@ -33,10 +33,19 @@ CONTEXT_SETTINGS = {"help_option_names": ["-h", "--help"]}
 @click.option("--github-app-secret", help="GitHub App Secret", required=True)
 @click.option("--port", help="Port of the server", default=80, show_default=True)
 @click.option("--sentry-dsn", help="Sentry DSN")
+@click.option(
+    "--sentry-environment", help="Environment we are running in (for Sentry)", default="development",
+)
 def main(
-    github_app_id, github_app_private_key, github_app_private_key_file, github_app_secret, port, sentry_dsn,
+    github_app_id,
+    github_app_private_key,
+    github_app_private_key_file,
+    github_app_secret,
+    port,
+    sentry_dsn,
+    sentry_environment,
 ):
-    sentry.setup_sentry(sentry_dsn)
+    sentry.setup_sentry(sentry_dsn, sentry_environment)
 
     logging.basicConfig(
         format="%(asctime)s %(levelname)-8s %(message)s", datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO,

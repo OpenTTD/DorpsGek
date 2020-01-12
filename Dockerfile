@@ -20,6 +20,8 @@ COPY requirements.txt \
         dorpsgek.ini \
         /code/
 COPY dorpsgek /code/dorpsgek
+# Needed for Sentry to know what version we are running
+RUN echo "${BUILD_VERSION}" > /code/.version
 
 RUN pip install -r requirements.txt
 
