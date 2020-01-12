@@ -16,6 +16,7 @@ from dorpsgek.events import (  # noqa
     issue,
     pull_request,
     push,
+    tag,
 )
 from dorpsgek.patches import gidgethub  # noqa
 from dorpsgek.protocols import irc  # noqa
