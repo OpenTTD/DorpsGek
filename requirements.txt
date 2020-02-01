@@ -16,7 +16,7 @@ multidict==4.7.4
 pycparser==2.19
 PyJWT==1.7.1
 PyYAML==5.3
-sentry-sdk==0.13.1
+sentry-sdk==0.14.1
 six==1.12.0
 typing-extensions==3.7.4.1
 uritemplate==3.0.0
