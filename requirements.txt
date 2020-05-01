@@ -20,6 +20,6 @@ sentry-sdk==0.14.3
 six==1.14.0
 typing-extensions==3.7.4.2
 uritemplate==3.0.1
-urllib3==1.25.8
+urllib3==1.25.9
 venusian==3.0.0
 yarl==1.4.2
