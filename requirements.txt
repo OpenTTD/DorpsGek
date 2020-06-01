@@ -12,7 +12,7 @@ gidgethub==4.1.0
 idna==2.9
 idna-ssl==1.1.0
 irc3==1.1.6
-multidict==4.7.5
+multidict==4.7.6
 pycparser==2.20
 PyJWT==1.7.1
 PyYAML==5.3.1
