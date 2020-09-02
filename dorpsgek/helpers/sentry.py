@@ -14,5 +14,7 @@ def setup_sentry(sentry_dsn, environment):
 
     sentry_sdk.init(sentry_dsn, release=release, environment=environment)
     log.info(
-        "Sentry initialized with release='%s' and environment='%s'", release, environment,
+        "Sentry initialized with release='%s' and environment='%s'",
+        release,
+        environment,
     )

@@ -48,7 +48,9 @@ async def get_oauth_token(repository):
             installation_id = _github_repositories[repository]
         else:
             data = await github_api.getitem(
-                f"/repos/{repository}/installation", accept=accept_format(version="machine-man-preview"), jwt=get_jwt(),
+                f"/repos/{repository}/installation",
+                accept=accept_format(version="machine-man-preview"),
+                jwt=get_jwt(),
             )
             installation_id = data["id"]
             _github_repositories[repository] = installation_id

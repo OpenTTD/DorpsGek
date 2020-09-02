@@ -71,7 +71,12 @@ async def pull_request_review(event, github_api):
     if payload["action"] == "submitted":
         payload["action"] = event.data["review"]["state"]
 
-    if payload["action"] not in ("dismissed", "approved", "commented", "changes_requested",):
+    if payload["action"] not in (
+        "dismissed",
+        "approved",
+        "commented",
+        "changes_requested",
+    ):
         return
 
     ref = event.data["pull_request"]["base"]["ref"]
