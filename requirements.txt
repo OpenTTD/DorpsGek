@@ -1,12 +1,12 @@
 aiohttp==3.6.2
 asn1crypto==1.4.0
 async-timeout==3.0.1
-attrs==19.3.0
+attrs==20.1.0
 certifi==2020.6.20
-cffi==1.14.1
+cffi==1.14.2
 chardet==3.0.4
 click==7.1.2
-cryptography==3.0
+cryptography==3.1
 docopt==0.6.2
 gidgethub==4.1.1
 idna==2.10
@@ -16,9 +16,9 @@ multidict==4.7.6
 pycparser==2.20
 PyJWT==1.7.1
 PyYAML==5.3.1
-sentry-sdk==0.16.2
+sentry-sdk==0.17.2
 six==1.15.0
-typing-extensions==3.7.4.2
+typing-extensions==3.7.4.3
 uritemplate==3.0.1
 urllib3==1.25.10
 venusian==3.0.0
