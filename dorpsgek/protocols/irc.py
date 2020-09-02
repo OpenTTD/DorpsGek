@@ -97,7 +97,8 @@ async def commit_comment(channels, repository_name, url, user, message):
 async def ref_branch_created(channels, repository_name, url, user, name):
     shortened_url = await shorten(url)
     _send_messages(
-        channels, [f"[{repository_name}] {user} created new branch: {name} {shortened_url}"],
+        channels,
+        [f"[{repository_name}] {user} created new branch: {name} {shortened_url}"],
     )
 
 
@@ -105,5 +106,6 @@ async def ref_branch_created(channels, repository_name, url, user, name):
 async def ref_tag_created(channels, repository_name, url, user, name):
     shortened_url = await shorten(url)
     _send_messages(
-        channels, [f"[{repository_name}] {user} created new tag: {name} {shortened_url}"],
+        channels,
+        [f"[{repository_name}] {user} created new tag: {name} {shortened_url}"],
     )

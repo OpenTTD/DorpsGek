@@ -37,13 +37,17 @@ class ErrorOnlyAccessLogger(AccessLogger):
 @click.option("--github-app-id", help="GitHub App ID")
 @click.option("--github-app-private-key", help="GitHub App Private Key")
 @click.option(
-    "--github-app-private-key-file", help="GitHub App Private Key", type=click.Path(exists=True, dir_okay=False),
+    "--github-app-private-key-file",
+    help="GitHub App Private Key",
+    type=click.Path(exists=True, dir_okay=False),
 )
 @click.option("--github-app-secret", help="GitHub App Secret", required=True)
 @click.option("--port", help="Port of the server", default=80, show_default=True)
 @click.option("--sentry-dsn", help="Sentry DSN")
 @click.option(
-    "--sentry-environment", help="Environment we are running in (for Sentry)", default="development",
+    "--sentry-environment",
+    help="Environment we are running in (for Sentry)",
+    default="development",
 )
 def main(
     github_app_id,
@@ -57,7 +61,9 @@ def main(
     sentry.setup_sentry(sentry_dsn, sentry_environment)
 
     logging.basicConfig(
-        format="%(asctime)s %(levelname)-8s %(message)s", datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO,
+        format="%(asctime)s %(levelname)-8s %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        level=logging.INFO,
     )
 
     github.GITHUB_APP_SECRET = github_app_secret
