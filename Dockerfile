@@ -3,10 +3,15 @@ FROM python:3.7-slim
 ARG BUILD_DATE=""
 ARG BUILD_VERSION="dev"
 
-LABEL maintainer="truebrain@openttd.org"
-LABEL org.label-schema.schema-version="1.0"
-LABEL org.label-schema.build-date=${BUILD_DATE}
-LABEL org.label-schema.version=${BUILD_VERSION}
+LABEL maintainer="OpenTTD Dev Team <info@openttd.org>"
+LABEL org.opencontainers.image.created=${BUILD_DATE}
+LABEL org.opencontainers.image.authors="OpenTTD Dev Team <info@openttd.org>"
+LABEL org.opencontainers.image.url="https://github.com/OpenTTD/DorpsGek"
+LABEL org.opencontainers.image.source="https://github.com/OpenTTD/DorpsGek"
+LABEL org.opencontainers.image.version=${BUILD_VERSION}
+LABEL org.opencontainers.image.licenses="GPLv2"
+LABEL org.opencontainers.image.title="DorpsGek"
+LABEL org.opencontainers.image.description="DorpsGek is an IRC bot that bridges GitHub events to IRC."
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git \
