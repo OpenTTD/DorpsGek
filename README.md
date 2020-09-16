@@ -10,4 +10,4 @@
 
 [![GitHub deployments (Production)](https://img.shields.io/github/deployments/OpenTTD/dorpsgek/production?label=production)](https://github.com/OpenTTD/dorpsgek/deployments)
 
-DorpsGek is an IRC bot, that for bridges GitHub events to IRC.
+DorpsGek is an IRC bot that bridges GitHub events to IRC.
