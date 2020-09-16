@@ -13,10 +13,6 @@ LABEL org.opencontainers.image.licenses="GPLv2"
 LABEL org.opencontainers.image.title="DorpsGek"
 LABEL org.opencontainers.image.description="DorpsGek is an IRC bot that bridges GitHub events to IRC."
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        git \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /code
 
 COPY requirements.txt \
@@ -24,17 +20,18 @@ COPY requirements.txt \
         README.md \
         dorpsgek.ini \
         /code/
-COPY dorpsgek /code/dorpsgek
 # Needed for Sentry to know what version we are running
 RUN echo "${BUILD_VERSION}" > /code/.version
 
-RUN pip install -r requirements.txt
+RUN pip --no-cache-dir install -r requirements.txt
 
 # Validate that what was installed was what was expected
 RUN pip freeze 2>/dev/null > requirements.installed \
         && diff -u --strip-trailing-cr requirements.txt requirements.installed 1>&2 \
         || ( echo "!! ERROR !! requirements.txt defined different packages or versions for installation" \
                 && exit 1 ) 1>&2
+
+COPY dorpsgek /code/dorpsgek
 
 ENTRYPOINT ["python", "-m", "dorpsgek"]
 CMD []
