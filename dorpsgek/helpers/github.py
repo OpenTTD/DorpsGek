@@ -62,7 +62,7 @@ async def get_oauth_token(repository):
                 return oauth_token
 
         data = await github_api.post(
-            f"/installations/{installation_id}/access_tokens",
+            f"/app/installations/{installation_id}/access_tokens",
             data="",
             accept=accept_format(version="machine-man-preview"),
             jwt=get_jwt(),
