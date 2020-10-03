@@ -20,7 +20,7 @@ async def get_dorpsgek_yml(github_api, repository):
     except gidgethub.BadRequest as err:
         # Check if there simply wasn't any .dorpsgek.yml in this repository
         if err.args == ("Not Found",):
-            return
+            return None
 
         raise
 
