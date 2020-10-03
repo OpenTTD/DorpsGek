@@ -13,20 +13,18 @@ async def dispatch(self, event, *args, **kwargs):
     """Dispatch an event to all registered function(s)."""
 
     found_callbacks = []
-    try:
+    if event.event in self._shallow_routes:
         found_callbacks.extend(self._shallow_routes[event.event])
-    except KeyError:
-        pass
-    try:
+
+    if event.event in self._deep_routes:
         details = self._deep_routes[event.event]
-    except KeyError:
-        pass
-    else:
+
         for data_key, data_values in details.items():
             if data_key in event.data:
                 event_value = event.data[data_key]
                 if event_value in data_values:
                     found_callbacks.extend(data_values[event_value])
+
     for callback in found_callbacks:
         try:
             await callback(event, *args, **kwargs)
