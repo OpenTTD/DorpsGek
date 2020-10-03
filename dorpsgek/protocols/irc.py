@@ -80,6 +80,8 @@ async def issue(channels, repository_name, url, user, action, issue_id, title):
         message = f"{user} closed issue #{issue_id}: {title}"
     elif action == "comment":
         message = f"{user} commented on issue #{issue_id}: {title}"
+    else:
+        return
 
     shortened_url = await shorten(url)
     _send_messages(channels, [f"[{repository_name}] {message} {shortened_url}"])
