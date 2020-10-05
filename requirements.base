@@ -3,6 +3,7 @@ click
 cryptography
 gidgethub
 irc3
+openttd-helpers
 pyjwt
 pyyaml
 sentry-sdk
