@@ -2,3 +2,9 @@ __pycache__/
 *.pyc
 /.env
 /.git/**
+/logs
+/data
+/plugins/GitHub/settings.py
+/plugins/WebLogsS3/settings.py
+/DorpsGek-generated.conf
+/DorpsGek-generated.conf.bak

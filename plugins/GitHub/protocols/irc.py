@@ -1,32 +1,16 @@
-import irc3
+from supybot import ircmsgs, world
 
-from dorpsgek.helpers import protocols
-from dorpsgek.helpers.url import shorten
-
-irc_connection = None
-
-
-def startup():
-    global irc_connection
-
-    cfg = irc3.utils.parse_config("bot", "dorpsgek.ini")
-    irc_connection = irc3.IrcBot.from_config(cfg)
-    irc_connection.run(forever=False)
+from ..helpers import protocols
+from ..helpers.url import shorten
 
 
 def _send_messages(channels, messages):
     channels = [f"#{c}" for c in channels]
 
-    autojoins = irc_connection.get_plugin("irc3.plugins.autojoins.AutoJoins")
-
-    for channel in channels:
-        # Try to join the channel before we send a message
-        if channel not in autojoins.joined:
-            autojoins.join(channel)
-            autojoins.channels.append(channel)
-
-        for message in messages:
-            irc_connection.privmsg(channel, message)
+    for irc in world.ircs:
+        for channel in channels:
+            for message in messages:
+                irc.queueMsg(ircmsgs.privmsg(channel, message))
 
 
 @protocols.register("irc", "pull-request")

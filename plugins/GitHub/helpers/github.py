@@ -11,12 +11,11 @@ from gidgethub import (
 from gidgethub.aiohttp import GitHubAPI
 from gidgethub.sansio import accept_format
 
+from .. import settings
+
 log = logging.getLogger(__name__)
 
 router = routing.Router()
-GITHUB_APP_ID = None
-GITHUB_APP_PRIVATE_KEY = None
-GITHUB_APP_SECRET = None
 
 _github_repositories = {}
 _github_installations = {}
@@ -32,14 +31,14 @@ class GitHubAPIContext:
 
 
 async def dispatch(headers, data):
-    event = sansio.Event.from_http(headers, data, secret=GITHUB_APP_SECRET)
+    event = sansio.Event.from_http(headers, data, secret=settings.GITHUB_APP_SECRET)
 
     async with GitHubAPIContext() as github_api:
         await router.dispatch(event, github_api)
 
 
 async def get_oauth_token(repository):
-    if GITHUB_APP_ID is None or GITHUB_APP_PRIVATE_KEY is None:
+    if settings.GITHUB_APP_ID is None or settings.GITHUB_APP_PRIVATE_KEY is None:
         return None
 
     async with GitHubAPIContext() as github_api:
@@ -82,8 +81,8 @@ def get_jwt():
     data = {
         "iat": now,
         "exp": now + 60,
-        "iss": GITHUB_APP_ID,
+        "iss": settings.GITHUB_APP_ID,
     }
 
-    j = jwt.encode(data, key=GITHUB_APP_PRIVATE_KEY, algorithm="RS256").decode()
+    j = jwt.encode(data, key=settings.GITHUB_APP_PRIVATE_KEY, algorithm="RS256").decode()
     return j
