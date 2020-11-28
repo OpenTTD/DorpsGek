@@ -1,7 +1,7 @@
 import re
 
-from dorpsgek.helpers import protocols
-from dorpsgek.helpers.github import router
+from ..helpers import protocols
+from ..helpers.github import router
 
 
 def filter_func(protocols, payload):

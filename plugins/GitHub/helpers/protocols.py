@@ -1,7 +1,8 @@
 import logging
 
 from collections import defaultdict
-from dorpsgek.helpers.dorpsgek import get_notification_protocols
+
+from .dorpsgek import get_notification_protocols
 
 log = logging.getLogger(__name__)
 _protocols = defaultdict(dict)

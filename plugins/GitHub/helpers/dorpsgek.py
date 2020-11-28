@@ -4,7 +4,8 @@ import logging
 import yaml
 
 from collections import defaultdict
-from dorpsgek.helpers.github import get_oauth_token
+
+from .github import get_oauth_token
 
 log = logging.getLogger(__name__)
 

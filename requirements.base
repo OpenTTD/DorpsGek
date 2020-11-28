@@ -1,6 +1,7 @@
 aiohttp
 click
 cryptography
+limnoria
 gidgethub
 irc3
 openttd-helpers

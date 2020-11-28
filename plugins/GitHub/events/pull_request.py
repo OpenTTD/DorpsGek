@@ -1,5 +1,5 @@
-from dorpsgek.helpers import protocols
-from dorpsgek.helpers.github import router
+from ..helpers import protocols
+from ..helpers.github import router
 
 
 @router.register("pull_request")

@@ -11,14 +11,14 @@ LABEL org.opencontainers.image.source="https://github.com/OpenTTD/DorpsGek"
 LABEL org.opencontainers.image.version=${BUILD_VERSION}
 LABEL org.opencontainers.image.licenses="GPLv2"
 LABEL org.opencontainers.image.title="DorpsGek"
-LABEL org.opencontainers.image.description="DorpsGek is an IRC bot that bridges GitHub events to IRC."
+LABEL org.opencontainers.image.description="DorpsGek is an IRC bot for OpenTTD channels."
 
 WORKDIR /code
 
 COPY requirements.txt \
         LICENSE \
         README.md \
-        dorpsgek.ini \
+        DorpsGek.conf \
         /code/
 # Needed for Sentry to know what version we are running
 RUN echo "${BUILD_VERSION}" > /code/.version
@@ -32,6 +32,8 @@ RUN pip freeze 2>/dev/null > requirements.installed \
                 && exit 1 ) 1>&2
 
 COPY dorpsgek /code/dorpsgek
+COPY plugins /code/plugins
+COPY conf /code/conf
 
 ENTRYPOINT ["python", "-m", "dorpsgek"]
 CMD []
