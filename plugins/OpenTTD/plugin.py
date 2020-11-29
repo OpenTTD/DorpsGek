@@ -1,4 +1,4 @@
-from supybot import callbacks, httpserver
+from supybot import callbacks, httpserver, schedule, world
 from supybot.commands import wrap
 
 # Minimize the amount of valid endpoints
@@ -51,6 +51,14 @@ httpserver.SupyHTTPRequestHandler.log_message = patched_log_message
 
 class OpenTTD(callbacks.Plugin):
     """Some commands specific for OpenTTD channels."""
+
+    def __init__(self, irc):
+        super().__init__(irc)
+
+        # We have the flush disabled in the configuration, but this also stops
+        # flushing of database-files. So every 2 minutes we still flush, which
+        # ironically doesn't flush everything, but only the database-files.
+        schedule.addPeriodicEvent(world.flush, 120, name="flush", now=False)
 
     def ports(self, irc, msg, args):
         """takes no arguments"""
