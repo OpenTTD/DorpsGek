@@ -11,7 +11,7 @@ gidgethub==4.2.0
 idna==3.0
 irc3==1.1.6
 limnoria==2020.12.05
-multidict==5.0.2
+multidict==5.1.0
 openttd-helpers==1.0.1
 pycparser==2.20
 PyJWT==1.7.1
