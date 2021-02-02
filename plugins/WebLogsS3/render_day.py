@@ -91,12 +91,12 @@ def render_day(base_url, channel, date, has_prev_day=None):
             for lineno, line in enumerate(fp.readlines()):
                 try:
                     dt, _, text = line.split(" ", 2)
+                    date, time = dt.split("T")
                 except ValueError:
                     # In case the logs got a bit corrupted, don't bail on us.
                     # This sometimes happen if two DorpsGek instances are
                     # writing to the same log file at the same time.
                     continue
-                date, time = dt.split("T")
 
                 # Strip out IP-addresses from join/part/quit/..
                 if text.startswith("***"):
