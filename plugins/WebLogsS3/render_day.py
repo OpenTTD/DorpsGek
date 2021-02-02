@@ -89,7 +89,13 @@ def render_day(base_url, channel, date, has_prev_day=None):
     else:
         with open(filename, encoding="utf-8", errors="ignore") as fp:
             for lineno, line in enumerate(fp.readlines()):
-                dt, _, text = line.split(" ", 2)
+                try:
+                    dt, _, text = line.split(" ", 2)
+                except ValueError:
+                    # In case the logs got a bit corrupted, don't bail on us.
+                    # This sometimes happen if two DorpsGek instances are
+                    # writing to the same log file at the same time.
+                    continue
                 date, time = dt.split("T")
 
                 # Strip out IP-addresses from join/part/quit/..
