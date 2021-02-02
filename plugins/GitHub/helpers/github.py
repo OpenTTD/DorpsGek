@@ -84,5 +84,4 @@ def get_jwt():
         "iss": settings.GITHUB_APP_ID,
     }
 
-    j = jwt.encode(data, key=settings.GITHUB_APP_PRIVATE_KEY, algorithm="RS256").decode()
-    return j
+    return jwt.encode(data, key=settings.GITHUB_APP_PRIVATE_KEY, algorithm="RS256")
