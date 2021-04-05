@@ -7,6 +7,7 @@ from .helpers import github
 # Import files that will hook themself up when imported
 from .events import (  # noqa
     commit_comment,
+    discussion,
     issue,
     pull_request,
     push,
