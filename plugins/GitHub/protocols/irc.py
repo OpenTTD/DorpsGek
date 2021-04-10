@@ -71,6 +71,19 @@ async def issue(channels, repository_name, url, user, action, issue_id, title):
     _send_messages(channels, [f"[{repository_name}] {message} {shortened_url}"])
 
 
+@protocols.register("irc", "discussion")
+async def discussion(channels, repository_name, url, user, action, discussion_id, title):
+    if action == "created":
+        message = f"{user} started discussion #{discussion_id}: {title}"
+    elif action == "comment":
+        message = f"{user} commented on discussion #{discussion_id}: {title}"
+    else:
+        return
+
+    shortened_url = await shorten(url)
+    _send_messages(channels, [f"[{repository_name}] {message} {shortened_url}"])
+
+
 @protocols.register("irc", "commit-comment")
 async def commit_comment(channels, repository_name, url, user, message):
     message = f"{user} left a comment on commit: {message}"
