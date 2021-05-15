@@ -3,6 +3,7 @@ import glob
 import html
 import os
 import re
+import urllib.parse
 
 FIRST_LOGDATE = {}
 
@@ -104,6 +105,13 @@ def render_day(base_url, channel, date, has_prev_day=None):
 
                 text = html.escape(text)
                 anchor = f'{time.replace(":", "")}-{lineno}'
+
+                # Detect links
+                text = re.sub(
+                    r"\bhttps?:\/\/([^\s()\.,]|\([^)\s]*\)|[\.,]\S)+",
+                    lambda m: f'<a href="{urllib.parse.quote(html.unescape(m.group()), safe="/:")}">{m.group()}</a>',
+                    text,
+                )
 
                 classname = "text"
                 if text.startswith("***"):
