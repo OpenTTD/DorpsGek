@@ -42,5 +42,5 @@ def render_year(base_url, channel, date):
             result += "</li>"
         result += "</ul>"
 
-    result += "</body>\n"
+    result += "</body>\n</html>\n"
     return result

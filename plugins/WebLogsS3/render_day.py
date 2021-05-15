@@ -132,5 +132,5 @@ def render_day(base_url, channel, date, has_prev_day=None):
                 result += f'<div><a class="anchor" name="{anchor}" href="#{anchor}">{time}</a>  '
                 result += f'<span class="{classname}">{text}</span></div>\n'
 
-    result += f"{next_day}</pre>\n</body>\n"
+    result += f"{next_day}</pre>\n</body>\n</html>\n"
     return result
