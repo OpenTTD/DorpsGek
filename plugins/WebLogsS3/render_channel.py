@@ -38,5 +38,5 @@ def render_channel(base_url, channel):
             result += "<li>"
         result += "</ul>"
 
-    result += "</body>\n"
+    result += "</body>\n</html>\n"
     return result

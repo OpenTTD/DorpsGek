@@ -43,5 +43,5 @@ def render_month(base_url, channel, date):
             result += "</li>"
         result += "</ul>"
 
-    result += "</body>\n"
+    result += "</body>\n</html>\n"
     return result

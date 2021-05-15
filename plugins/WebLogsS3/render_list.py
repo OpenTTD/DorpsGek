@@ -27,5 +27,5 @@ def render_list(base_url):
             result += "<li>"
         result += "</ul>"
 
-    result += "</body>\n"
+    result += "</body>\n</html>\n"
     return result
