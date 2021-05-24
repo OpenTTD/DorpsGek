@@ -13,9 +13,9 @@ log = logging.getLogger(__name__)
 async def get_dorpsgek_yml(github_api, repository):
     try:
         oauth_token = await get_oauth_token(repository)
-        # Always use .dorpsgek.yml from master
+        # Always use .dorpsgek.yml from the default branch
         response = await github_api.getitem(
-            f"/repos/{repository}/contents/.dorpsgek.yml?ref=master",
+            f"/repos/{repository}/contents/.dorpsgek.yml",
             oauth_token=oauth_token,
         )
     except gidgethub.BadRequest as err:
