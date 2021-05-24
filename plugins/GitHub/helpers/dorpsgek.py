@@ -28,7 +28,7 @@ async def get_dorpsgek_yml(github_api, repository):
     return base64.b64decode(response["content"])
 
 
-async def get_notification_protocols(github_api, repository_name, ref, type):
+async def get_notification_protocols(github_api, repository_name, type):
     protocols = defaultdict(list)
     # Always inform the #dorpsgek IRC channel about everything
     protocols["irc"].append("dorpsgek")
@@ -36,7 +36,7 @@ async def get_notification_protocols(github_api, repository_name, ref, type):
     try:
         raw_yml = await get_dorpsgek_yml(github_api, repository_name)
     except Exception:
-        log.exception("Couldn't parse .dorpsgek.yml in %s at ref %s", repository_name, ref)
+        log.exception("Couldn't parse .dorpsgek.yml in %s", repository_name)
         return protocols
 
     if not raw_yml:

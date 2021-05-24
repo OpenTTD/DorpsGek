@@ -80,5 +80,4 @@ async def push(event, github_api):
         "commits": commits,
     }
 
-    ref = event.data["head_commit"]["id"]
-    await protocols.dispatch(github_api, repository_name, "push", payload, ref=ref, filter_func=filter_func)
+    await protocols.dispatch(github_api, repository_name, "push", payload, filter_func=filter_func)
