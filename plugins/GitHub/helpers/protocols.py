@@ -8,8 +8,8 @@ log = logging.getLogger(__name__)
 _protocols = defaultdict(dict)
 
 
-async def dispatch(github_api, repository_name, type, payload, ref="master", filter_func=None):
-    protocols = await get_notification_protocols(github_api, repository_name, ref, type)
+async def dispatch(github_api, repository_name, type, payload, filter_func=None):
+    protocols = await get_notification_protocols(github_api, repository_name, type)
 
     # If a filter function is set, and it returns False, don't broadcast
     # this notification
