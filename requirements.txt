@@ -16,7 +16,7 @@ openttd-helpers==1.0.1
 pycparser==2.20
 PyJWT==2.1.0
 PyYAML==5.4.1
-sentry-sdk==1.0.0
+sentry-sdk==1.1.0
 six==1.15.0
 typing-extensions==3.7.4.3
 uritemplate==3.0.1
