@@ -10,7 +10,7 @@ docopt==0.6.2
 gidgethub==5.0.1
 idna==3.3
 irc3==1.1.6
-limnoria==2021.7.21
+limnoria==2021.11.20
 multidict==5.1.0
 openttd-helpers==1.0.1
 pycparser==2.20
