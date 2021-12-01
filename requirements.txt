@@ -13,7 +13,7 @@ irc3==1.1.6
 limnoria==2021.11.20
 multidict==5.2.0
 openttd-helpers==1.0.1
-pycparser==2.20
+pycparser==2.21
 PyJWT==2.1.0
 PyYAML==5.4.1
 sentry-sdk==1.4.3
