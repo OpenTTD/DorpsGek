@@ -5,5 +5,7 @@ notifications:
     - openttd.notice
 
   pull-request:
+    except-by:
+    - app/dependabot
   issue:
   tag-created:
