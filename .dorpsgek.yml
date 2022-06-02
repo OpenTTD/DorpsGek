@@ -6,6 +6,6 @@ notifications:
 
   pull-request:
     except-by:
-    - app/dependabot
+    - dependabot[bot]
   issue:
   tag-created:
