@@ -14,7 +14,7 @@ def _send_messages(channels, messages):
 
 
 @protocols.register("irc", "pull-request")
-async def pull_request(channels, repository_name, url, user, action, pull_id, title):
+async def pull_request(channels, repository_name, url, user, action, pull_id, title, author):
     if action == "opened":
         message = f"{user} opened pull request #{pull_id}: {title}"
     elif action == "closed":
