@@ -63,8 +63,8 @@ class OpenTTD(callbacks.Plugin):
     def ports(self, irc, msg, args):
         """takes no arguments"""
         irc.reply(
-            "OpenTTD uses TCP and UDP port 3979 for server <-> client communication, "
-            "UDP port 3978 for masterserver (advertise) communication (outbound), "
+            "OpenTTD uses TCP port 3979 for server <-> client communication, "
+            "UDP port 3979 for LAN discovery, "
             "and TCP port 3978 for content service, a.k.a. BaNaNaS (outbound)"
         )
 
