@@ -12,6 +12,7 @@ from .render_month import render_month
 from .render_year import render_year
 
 
+# Please change the "last modified" date below when making any changes to the CSS.
 INDEX_CSS = """
 body {
     margin: auto;
@@ -96,7 +97,9 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
         if path == "/css/index.css":
             self.send_response(200)
             self.send_header("Content-Type", "text/css")
-            self.send_header("Cache-Control", "public, max-age=3600")
+            # Please change this date whenever the CSS is changed.
+            self.send_header("Last-Modified", "Mon, 08 Aug 2022 00:00:00 GMT")
+            self.send_header("Cache-Control", "public, max-age=86400")
             self.end_headers()
             self.wfile.write(INDEX_CSS.encode())
             return
@@ -110,7 +113,7 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
 
         if len(spath) == 2 and spath[-1] == "":
             html = render_list(base_url)
-            headers["Cache-Control"] = "public, max-age=3600"
+            headers["Cache-Control"] = "public, max-age=86400"
 
         elif f"#{spath[1]}" in settings.PUBLIC_CHANNELS:
             if len(spath) == 3 and spath[-1] == "":
@@ -120,7 +123,7 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
 
                 # This page has a reference to "today".
                 headers["Last-Modified"] = now.strftime("%a, %d %b %Y %H:%M:%S GMT")
-                headers["Cache-Control"] = "public, max-age=3600"
+                headers["Cache-Control"] = "public, max-age=86400"
 
             if len(spath) == 4 and spath[-1] == "":
                 _, channel, year, _ = spath
@@ -144,7 +147,7 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
                             last_modified = request + datetime.timedelta(days=days_in_year)
 
                         headers["Last-Modified"] = last_modified.strftime("%a, %d %b %Y %H:%M:%S GMT")
-                        headers["Cache-Control"] = "public, max-age=3600"
+                        headers["Cache-Control"] = "public, max-age=86400"
 
             elif len(spath) == 5 and spath[-1] == "":
                 _, channel, year, month, _ = spath
@@ -169,7 +172,7 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
                             last_modified = request + datetime.timedelta(days=days_in_month)
 
                         headers["Last-Modified"] = last_modified.strftime("%a, %d %b %Y %H:%M:%S GMT")
-                        headers["Cache-Control"] = "public, max-age=3600"
+                        headers["Cache-Control"] = "public, max-age=86400"
 
             elif len(spath) == 5:
                 _, channel, year, month, day = spath
@@ -193,7 +196,7 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
                         else:
                             last_modified = request + datetime.timedelta(days=1)
                             headers["Last-Modified"] = last_modified.strftime("%a, %d %b %Y %H:%M:%S GMT")
-                            headers["Cache-Control"] = "public, max-age=3600"
+                            headers["Cache-Control"] = "public, max-age=86400"
 
         if not html:
             self.send_response(404)
