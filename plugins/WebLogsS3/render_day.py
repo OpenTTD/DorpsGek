@@ -109,7 +109,7 @@ def render_day(base_url, channel, date, has_prev_day=None):
                 # Detect links
                 text = re.sub(
                     r"\bhttps?:\/\/([^\s()\.,]|\([^)\s]*\)|[\.,]\S)+",
-                    lambda m: f'<a href="{urllib.parse.quote(html.unescape(m.group()), safe="/:")}">{m.group()}</a>',
+                    lambda m: f'<a href="{urllib.parse.quote(html.unescape(m.group()), safe="/:#")}">{m.group()}</a>',
                     text,
                 )
 
