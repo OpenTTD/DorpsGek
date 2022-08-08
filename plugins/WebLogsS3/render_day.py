@@ -82,11 +82,11 @@ def render_day(base_url, channel, date, has_prev_day=None):
         if FIRST_LOGDATE[channel] > date:
             result += '<span class="prev">(this day is from before recording)</span>'
         elif date < now:
-            result += '<span class="prev">(nobody has said anything yet today)</span>'
+            result += '<span class="prev">(nothing was recorded on this day)</span>'
         elif date > now:
             result += '<span class="prev">(this day is in the future)</span>'
         else:
-            result += '<span class="prev">(nothing was recorded on this day)</span>'
+            result += '<span class="prev">(nobody has said anything yet today)</span>'
     else:
         with open(filename, encoding="utf-8", errors="ignore") as fp:
             for lineno, line in enumerate(fp.readlines()):
