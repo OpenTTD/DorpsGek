@@ -93,6 +93,9 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
     name = "WebLogsS3"
     defaultResponse = "404: page not found"
 
+    def __init__(self):
+        self.start_time = datetime.datetime.now()
+
     def render_html(self, path):
         base_url = settings.WEB_LOGS_URL or "/weblogs"
         spath = path.split("/")
@@ -103,6 +106,9 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
 
         if len(spath) == 2 and spath[-1] == "":
             html = render_list(base_url)
+
+            # This page was last modified when we started the bot.
+            headers["Last-Modified"] = self.start_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
             headers["Cache-Control"] = "public, max-age=86400"
 
         elif f"#{spath[1]}" in settings.PUBLIC_CHANNELS:
