@@ -93,17 +93,7 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
     name = "WebLogsS3"
     defaultResponse = "404: page not found"
 
-    def doGet(self, handler, path):
-        if path == "/css/index.css":
-            self.send_response(200)
-            self.send_header("Content-Type", "text/css")
-            # Please change this date whenever the CSS is changed.
-            self.send_header("Last-Modified", "Mon, 08 Aug 2022 00:00:00 GMT")
-            self.send_header("Cache-Control", "public, max-age=86400")
-            self.end_headers()
-            self.wfile.write(INDEX_CSS.encode())
-            return
-
+    def render_html(self, path):
         base_url = settings.WEB_LOGS_URL or "/weblogs"
         spath = path.split("/")
         now = datetime.date.today()
@@ -197,6 +187,26 @@ class WebLogsS3Callback(httpserver.SupyHTTPServerCallback):
                             last_modified = request + datetime.timedelta(days=1)
                             headers["Last-Modified"] = last_modified.strftime("%a, %d %b %Y %H:%M:%S GMT")
                             headers["Cache-Control"] = "public, max-age=86400"
+
+        return html, headers
+
+    def doGet(self, handler, path):
+        if path == "/css/index.css":
+            self.send_response(200)
+            self.send_header("Content-Type", "text/css")
+            # Please change this date whenever the CSS is changed.
+            self.send_header("Last-Modified", "Mon, 08 Aug 2022 00:00:00 GMT")
+            self.send_header("Cache-Control", "public, max-age=86400")
+            self.end_headers()
+            self.wfile.write(INDEX_CSS.encode())
+            return
+
+        try:
+            html, headers = self.render_html(path)
+        except ValueError:
+            # Someone entered an invalid date in the path. We just let it fallthrough to the 404 page.
+            html = ""
+            headers = {}
 
         if not html:
             self.send_response(404)
