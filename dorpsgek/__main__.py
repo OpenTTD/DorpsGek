@@ -29,6 +29,8 @@ from openttd_helpers.sentry_helper import click_sentry
     multiple=True,
     default=["dorpsgek-test"],
 )
+@click.option("--discord-webhook-url", help="URL to the Discord webhook")
+@click.option("--discord-unfiltered-webhook-url", help="URL to the Discord webhook that receives all events")
 @click.option("--port", help="Port of the server", default=80, show_default=True)
 def main(
     github_app_id,
@@ -41,6 +43,8 @@ def main(
     addressed_by,
     web_logs_url,
     channel,
+    discord_webhook_url,
+    discord_unfiltered_webhook_url,
     port,
 ):
     if github_app_private_key_file:
@@ -59,6 +63,8 @@ def main(
         fp.write(f"GITHUB_APP_SECRET = {github_app_secret!r}\n")
         fp.write(f"GITHUB_APP_ID = {github_app_id!r}\n")
         fp.write(f"GITHUB_APP_PRIVATE_KEY = {github_private_key!r}\n")
+        fp.write(f"DISCORD_WEBHOOK_URL = {discord_webhook_url!r}\n")
+        fp.write(f"DISCORD_UNFILTERED_WEBHOOK_URL = {discord_unfiltered_webhook_url!r}\n")
 
     with open("plugins/WebLogsS3/settings.py", "w") as fp:
         public_channels = [f"#{c.split(',')[0]}" for c in set(channel) if c.endswith(",public")]

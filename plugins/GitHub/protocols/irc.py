@@ -14,7 +14,7 @@ def _send_messages(channels, messages):
 
 
 @protocols.register("irc", "pull-request")
-async def pull_request(channels, repository_name, url, user, action, pull_id, title, author):
+async def pull_request(channels, repository_name, url, user, avatar_url, action, pull_id, title, author):
     if action == "opened":
         message = f"{user} opened pull request #{pull_id}: {title}"
     elif action == "closed":
@@ -43,7 +43,7 @@ async def pull_request(channels, repository_name, url, user, action, pull_id, ti
 
 
 @protocols.register("irc", "push")
-async def push(channels, repository_name, url, user, branch, commits):
+async def push(channels, repository_name, url, user, avatar_url, branch, commits):
     commit_count = len(commits)
 
     shortened_url = await shorten(url)
@@ -55,7 +55,7 @@ async def push(channels, repository_name, url, user, branch, commits):
 
 
 @protocols.register("irc", "issue")
-async def issue(channels, repository_name, url, user, action, issue_id, title):
+async def issue(channels, repository_name, url, user, avatar_url, action, issue_id, title, reason):
     if action == "opened":
         message = f"{user} opened issue #{issue_id}: {title}"
     elif action == "reopened":
@@ -72,7 +72,7 @@ async def issue(channels, repository_name, url, user, action, issue_id, title):
 
 
 @protocols.register("irc", "discussion")
-async def discussion(channels, repository_name, url, user, action, discussion_id, title):
+async def discussion(channels, repository_name, url, user, avatar_url, action, discussion_id, title):
     if action == "created":
         message = f"{user} started discussion #{discussion_id}: {title}"
     elif action == "comment":
@@ -85,7 +85,7 @@ async def discussion(channels, repository_name, url, user, action, discussion_id
 
 
 @protocols.register("irc", "commit-comment")
-async def commit_comment(channels, repository_name, url, user, message):
+async def commit_comment(channels, repository_name, url, user, avatar_url, message):
     message = f"{user} left a comment on commit: {message}"
 
     shortened_url = await shorten(url)
@@ -93,7 +93,7 @@ async def commit_comment(channels, repository_name, url, user, message):
 
 
 @protocols.register("irc", "branch-created")
-async def ref_branch_created(channels, repository_name, url, user, name):
+async def ref_branch_created(channels, repository_name, url, user, avatar_url, name):
     shortened_url = await shorten(url)
     _send_messages(
         channels,
@@ -102,7 +102,7 @@ async def ref_branch_created(channels, repository_name, url, user, name):
 
 
 @protocols.register("irc", "tag-created")
-async def ref_tag_created(channels, repository_name, url, user, name):
+async def ref_tag_created(channels, repository_name, url, user, avatar_url, name):
     shortened_url = await shorten(url)
     _send_messages(
         channels,

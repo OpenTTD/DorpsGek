@@ -15,6 +15,7 @@ from .events import (  # noqa
 )
 from .patches import gidgethub  # noqa
 from .protocols import irc as irc_protocols  # noqa
+from .protocols import discord as discord_protocols  # noqa
 
 
 class GitHubCallback(httpserver.SupyHTTPServerCallback):
