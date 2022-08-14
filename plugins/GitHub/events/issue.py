@@ -53,6 +53,8 @@ async def issues(event, github_api):
         "title": event.data["issue"]["title"],
         "url": event.data["issue"]["html_url"],
         "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
+        "reason": event.data["issue"]["state_reason"],
     }
 
     if payload["action"] not in ("opened", "closed", "reopened"):
@@ -78,6 +80,8 @@ async def issue_comment(event, github_api):
         "title": event.data["issue"]["title"],
         "url": event.data["issue"]["html_url"],
         "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
+        "reason": None,
     }
 
     await protocols.dispatch(github_api, repository_name, "issue", payload, filter_func=filter_func)

@@ -40,6 +40,7 @@ async def pull_request(event, github_api):
         "title": event.data["pull_request"]["title"],
         "url": event.data["pull_request"]["html_url"],
         "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
         "author": event.data["pull_request"]["user"]["login"],
     }
 
@@ -64,6 +65,7 @@ async def issue_comment(event, github_api):
         "pull_id": event.data["issue"]["number"],
         "url": event.data["comment"]["html_url"],
         "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
         "title": event.data["issue"]["title"],
         "action": "comment",
         "author": event.data["issue"]["user"]["login"],
@@ -82,6 +84,7 @@ async def pull_request_review(event, github_api):
         "title": event.data["pull_request"]["title"],
         "url": event.data["review"]["html_url"],
         "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
         "action": event.data["action"],
         "author": event.data["pull_request"]["user"]["login"],
     }

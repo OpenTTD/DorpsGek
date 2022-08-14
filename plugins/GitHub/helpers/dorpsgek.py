@@ -6,6 +6,7 @@ import yaml
 from collections import defaultdict
 
 from .github import get_oauth_token
+from .. import settings
 
 log = logging.getLogger(__name__)
 
@@ -30,8 +31,10 @@ async def get_dorpsgek_yml(github_api, repository):
 
 async def get_notification_protocols(github_api, repository_name, type):
     protocols = defaultdict(list)
-    # Always inform the #dorpsgek IRC channel about everything
+    # Always inform the #dorpsgek IRC channel and configured Discord channel about everything
     protocols["irc"].append("dorpsgek")
+    if settings.DISCORD_UNFILTERED_WEBHOOK_URL:
+        protocols["discord"].append(settings.DISCORD_UNFILTERED_WEBHOOK_URL)
 
     try:
         raw_yml = await get_dorpsgek_yml(github_api, repository_name)
@@ -47,6 +50,10 @@ async def get_notification_protocols(github_api, repository_name, type):
     # If this notification is not enable, don't send any
     if type not in yml["notifications"]:
         return protocols
+
+    # For all enabled notification types, also inform Discord
+    if settings.DISCORD_WEBHOOK_URL:
+        protocols["discord"].append(settings.DISCORD_WEBHOOK_URL)
 
     # The global list is true for every type
     if "global" in yml["notifications"]:

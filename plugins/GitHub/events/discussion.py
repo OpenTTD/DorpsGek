@@ -13,6 +13,7 @@ async def discussion(event, github_api):
         "title": event.data["discussion"]["title"],
         "url": event.data["discussion"]["html_url"],
         "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
     }
 
     if payload["action"] not in ("created",):
@@ -35,6 +36,7 @@ async def discussion_comment(event, github_api):
         "title": event.data["discussion"]["title"],
         "url": event.data["discussion"]["html_url"],
         "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
     }
 
     await protocols.dispatch(github_api, repository_name, "discussion", payload)

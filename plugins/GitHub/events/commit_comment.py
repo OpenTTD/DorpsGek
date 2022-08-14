@@ -20,6 +20,7 @@ async def commit_comment(event, github_api):
         "repository_name": repository_name,
         "url": event.data["comment"]["html_url"],
         "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
         "message": response["commit"]["message"].split("\n")[0],
     }
 

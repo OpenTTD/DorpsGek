@@ -48,7 +48,6 @@ async def push(event, github_api):
     if event.data["created"] or event.data["deleted"]:
         return
 
-    branch = event.data["ref"]
     repository_name = event.data["repository"]["full_name"]
 
     commits = [
@@ -59,7 +58,6 @@ async def push(event, github_api):
         }
         for commit in event.data["commits"]
     ]
-    user = event.data["sender"]["login"]
 
     if len(event.data["commits"]) > 1:
         url = event.data["compare"]
@@ -67,14 +65,15 @@ async def push(event, github_api):
         url = event.data["commits"][0]["url"]
 
     # Only notify about pushes to heads; not to tags etc
+    branch = event.data["ref"]
     if not branch.startswith("refs/heads/"):
         return
-
     branch = branch[len("refs/heads/") :]
 
     payload = {
         "repository_name": repository_name,
-        "user": user,
+        "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
         "url": url,
         "branch": branch,
         "commits": commits,

@@ -19,6 +19,7 @@ async def create(event, github_api):
     payload = {
         "repository_name": repository_name,
         "user": event.data["sender"]["login"],
+        "avatar_url": event.data["sender"]["avatar_url"],
         "url": url,
         "name": ref_name,
     }
