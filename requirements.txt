@@ -17,7 +17,7 @@ limnoria==2022.9.20
 multidict==6.0.2
 openttd-helpers==1.1.0
 pycparser==2.21
-PyJWT==2.4.0
+PyJWT==2.6.0
 PyYAML==6.0
 sentry-sdk==1.9.10
 six==1.16.0
