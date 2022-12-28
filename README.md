@@ -4,9 +4,8 @@
 [![GitHub Tag](https://img.shields.io/github/v/tag/OpenTTD/dorpsgek?include_prereleases&label=stable)](https://github.com/OpenTTD/dorpsgek/releases)
 [![GitHub commits since latest release](https://img.shields.io/github/commits-since/OpenTTD/dorpsgek/latest/main)](https://github.com/OpenTTD/dorpsgek/commits/main)
 
-[![GitHub Workflow Status (Testing)](https://img.shields.io/github/workflow/status/OpenTTD/dorpsgek/Testing/main?label=main)](https://github.com/OpenTTD/dorpsgek/actions?query=workflow%3ATesting)
-[![GitHub Workflow Status (Publish Image)](https://img.shields.io/github/workflow/status/OpenTTD/dorpsgek/Publish%20image?label=publish)](https://github.com/OpenTTD/dorpsgek/actions?query=workflow%3A%22Publish+image%22)
-[![GitHub Workflow Status (Deployments)](https://img.shields.io/github/workflow/status/OpenTTD/dorpsgek/Deployment?label=deployment)](https://github.com/OpenTTD/dorpsgek/actions?query=workflow%3A%22Deployment%22)
+[![GitHub Workflow Status (Testing)](https://img.shields.io/github/actions/workflow/status/OpenTTD/dorpsgek/testing.yml?branch=main&label=main)](https://github.com/OpenTTD/dorpsgek/actions/workflows/testing.yml)
+[![GitHub Workflow Status (Release)](https://img.shields.io/github/actions/workflow/status/OpenTTD/dorpsgek/release.yml?label=release)](https://github.com/OpenTTD/dorpsgek/actions/workflows/release.yml)
 
 [![GitHub deployments (Production)](https://img.shields.io/github/deployments/OpenTTD/dorpsgek/production?label=production)](https://github.com/OpenTTD/dorpsgek/deployments)
 
