@@ -15,7 +15,7 @@ idna==3.4
 irc3==1.1.8
 limnoria==2022.11.10
 multidict==6.0.4
-openttd-helpers==1.1.0
+openttd-helpers==1.2.0
 pycparser==2.21
 PyJWT==2.6.0
 PyYAML==6.0
