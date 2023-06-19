@@ -24,7 +24,7 @@ _github_installations = {}
 class GitHubAPIContext:
     async def __aenter__(self):
         self._session = aiohttp.ClientSession()
-        return GitHubAPI(self._session, "DorpsGek/1.0")
+        return GitHubAPI(self._session, "DorpsGek/1.0", base_url=settings.GITHUB_API_URL)
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         await self._session.close()

@@ -18,6 +18,13 @@ from openttd_helpers.sentry_helper import click_sentry
     type=click.Path(exists=True, dir_okay=False),
 )
 @click.option("--github-app-secret", help="GitHub App Secret")
+@click.option(
+    "--github-api-url",
+    help="GitHub API URL to use with GitHub App.",
+    default="https://api.github.com",
+    show_default=True,
+    metavar="URL",
+)
 @click.option("--irc-username", help="Nick to use on IRC", default="DorpsGek_dev")
 @click.option("--nickserv-username", help="Username as known by NickServ")
 @click.option("--nickserv-password", help="Password for --nickserv-username")
@@ -37,6 +44,7 @@ def main(
     github_app_private_key,
     github_app_private_key_file,
     github_app_secret,
+    github_api_url,
     irc_username,
     nickserv_username,
     nickserv_password,
@@ -63,6 +71,7 @@ def main(
         fp.write(f"GITHUB_APP_SECRET = {github_app_secret!r}\n")
         fp.write(f"GITHUB_APP_ID = {github_app_id!r}\n")
         fp.write(f"GITHUB_APP_PRIVATE_KEY = {github_private_key!r}\n")
+        fp.write(f"GITHUB_API_URL = {github_api_url!r}\n")
         fp.write(f"DISCORD_WEBHOOK_URL = {discord_webhook_url!r}\n")
         fp.write(f"DISCORD_UNFILTERED_WEBHOOK_URL = {discord_unfiltered_webhook_url!r}\n")
 
