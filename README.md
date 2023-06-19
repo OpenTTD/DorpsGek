@@ -1,13 +1,6 @@
 # DorpsGek
 
 [![GitHub License](https://img.shields.io/github/license/OpenTTD/dorpsgek)](https://github.com/OpenTTD/dorpsgek/blob/main/LICENSE)
-[![GitHub Tag](https://img.shields.io/github/v/tag/OpenTTD/dorpsgek?include_prereleases&label=stable)](https://github.com/OpenTTD/dorpsgek/releases)
-[![GitHub commits since latest release](https://img.shields.io/github/commits-since/OpenTTD/dorpsgek/latest/main)](https://github.com/OpenTTD/dorpsgek/commits/main)
-
-[![GitHub Workflow Status (Testing)](https://img.shields.io/github/actions/workflow/status/OpenTTD/dorpsgek/testing.yml?branch=main&label=main)](https://github.com/OpenTTD/dorpsgek/actions/workflows/testing.yml)
-[![GitHub Workflow Status (Release)](https://img.shields.io/github/actions/workflow/status/OpenTTD/dorpsgek/release.yml?label=release)](https://github.com/OpenTTD/dorpsgek/actions/workflows/release.yml)
-
-[![GitHub deployments (Production)](https://img.shields.io/github/deployments/OpenTTD/dorpsgek/production?label=production)](https://github.com/OpenTTD/dorpsgek/deployments)
 
 DorpsGek is an IRC bot with several tasks:
 - It bridges GitHub Events to IRC
