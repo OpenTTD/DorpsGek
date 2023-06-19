@@ -32,7 +32,6 @@ COMMAND_WHITELIST = {
         "topic",
     ),
     "WebLogsS3": ("logs",),
-    "Seen": ("seen",),
     "Channel": (
         "dehalfop",
         "deop",
