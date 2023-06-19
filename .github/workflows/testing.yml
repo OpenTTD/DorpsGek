@@ -13,5 +13,5 @@ jobs:
     name: Testing
     uses: OpenTTD/actions/.github/workflows/rw-entry-testing-docker-py.yml@v4
     with:
-      python-path: dorpsgek
+      python-path: dorpsgek plugins
       python-version: 3.8
