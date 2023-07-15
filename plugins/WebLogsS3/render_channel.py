@@ -27,7 +27,9 @@ def render_channel(base_url, channel):
         result += '<pre><span class="prev">(nothing was recorded for this channel)</span></pre>'
     else:
         result += "<ul>"
-        result += f'<li><a href="{base_url}/{channel}/{now.year}/{now.month}/{now.day}.html">Jump to today</a></li>'
+        result += "<li>"
+        result += f'<a href="{base_url}/{channel}/{now.year:04d}/{now.month:02d}/{now.day:02d}.html">Jump to today</a>'
+        result += "</li>"
         result += "</ul>"
 
         result += "<ul>"
