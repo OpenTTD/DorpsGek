@@ -24,6 +24,9 @@ async def _send_messages(hook_urls, user, avatar_url, message):
                         "parse": [],
                     },
                 },
+                headers={
+                    "User-Agent": "DorpsGek (https://github.com/OpenTTD/DorpsGek, 1.0)",
+                },
             )
             if resp.status not in (200, 204):
                 log.error(f"Failed to send message to Discord: {resp.status}")
