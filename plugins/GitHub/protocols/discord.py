@@ -111,9 +111,9 @@ async def discussion(hook_urls, repository_name, url, user, avatar_url, action, 
 
 
 @protocols.register("discord", "commit-comment")
-async def commit_comment(hook_urls, repository_name, url, user, avatar_url, message):
+async def commit_comment(hook_urls, repository_name, url, user, avatar_url, first_line):
     message = f"**{repository_name}** - "
-    message += f":open_mouth: left a comment on commit: {url}\n> {message}"
+    message += f":open_mouth: left a comment on commit: {url}\n> {first_line}"
 
     await _send_messages(hook_urls, user, avatar_url, message)
 

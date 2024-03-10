@@ -21,7 +21,7 @@ async def commit_comment(event, github_api):
         "url": event.data["comment"]["html_url"],
         "user": event.data["sender"]["login"],
         "avatar_url": event.data["sender"]["avatar_url"],
-        "message": response["commit"]["message"].split("\n")[0],
+        "first_line": response["commit"]["message"].split("\n")[0],
     }
 
     await protocols.dispatch(github_api, repository_name, "commit-comment", payload)
