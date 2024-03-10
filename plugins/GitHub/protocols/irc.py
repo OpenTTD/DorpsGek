@@ -85,8 +85,8 @@ async def discussion(channels, repository_name, url, user, avatar_url, action, d
 
 
 @protocols.register("irc", "commit-comment")
-async def commit_comment(channels, repository_name, url, user, avatar_url, message):
-    message = f"{user} left a comment on commit: {message}"
+async def commit_comment(channels, repository_name, url, user, avatar_url, first_line):
+    message = f"{user} left a comment on commit: {first_line}"
 
     shortened_url = await shorten(url)
     _send_messages(channels, [f"[{repository_name}] {message} {shortened_url}"])
