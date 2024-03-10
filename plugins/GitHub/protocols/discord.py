@@ -132,3 +132,14 @@ async def ref_tag_created(hook_urls, repository_name, url, user, avatar_url, nam
     message += f":tada: created a new tag [{name}]({url})"
 
     await _send_messages(hook_urls, user, avatar_url, message)
+
+
+@protocols.register("discord", "workflow-run")
+async def workflow_run(hook_urls, repository_name, url, user, avatar_url, workflow_name, conclusion, author, path):
+    if conclusion == "success":
+        return
+
+    message = f"**{repository_name}** - "
+    message += f":thunder_cloud_rain: [{workflow_name}]({url}) workflow was not successful"
+
+    await _send_messages(hook_urls, user, avatar_url, message)

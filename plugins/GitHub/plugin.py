@@ -12,6 +12,7 @@ from .events import (  # noqa
     pull_request,
     push,
     tag,
+    workflow,
 )
 from .patches import gidgethub  # noqa
 from .protocols import irc as irc_protocols  # noqa
