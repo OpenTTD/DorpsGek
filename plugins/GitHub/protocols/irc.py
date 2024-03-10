@@ -108,3 +108,14 @@ async def ref_tag_created(channels, repository_name, url, user, avatar_url, name
         channels,
         [f"[{repository_name}] {user} created new tag: {name} {shortened_url}"],
     )
+
+
+@protocols.register("irc", "workflow-run")
+async def workflow_run(channels, repository_name, url, user, avatar_url, workflow_name, conclusion, author, path):
+    if conclusion == "success":
+        return
+
+    message = f"{workflow_name} workflow was not successful"
+
+    shortened_url = await shorten(url)
+    _send_messages(channels, [f"[{repository_name}] {message} {shortened_url}"])
