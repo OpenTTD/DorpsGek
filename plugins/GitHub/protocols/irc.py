@@ -112,7 +112,7 @@ async def ref_tag_created(channels, repository_name, url, user, avatar_url, name
 
 @protocols.register("irc", "workflow-run")
 async def workflow_run(channels, repository_name, url, user, avatar_url, workflow_name, conclusion, author, path):
-    if conclusion == "success":
+    if conclusion in ("success", "skipped"):
         return
 
     message = f"{workflow_name} workflow was not successful"
