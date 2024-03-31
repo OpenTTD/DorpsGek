@@ -136,7 +136,7 @@ async def ref_tag_created(hook_urls, repository_name, url, user, avatar_url, nam
 
 @protocols.register("discord", "workflow-run")
 async def workflow_run(hook_urls, repository_name, url, user, avatar_url, workflow_name, conclusion, author, path):
-    if conclusion == "success":
+    if conclusion in ("success", "skipped"):
         return
 
     message = f"**{repository_name}** - "
