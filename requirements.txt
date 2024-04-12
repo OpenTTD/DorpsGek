@@ -10,7 +10,7 @@ cryptography==42.0.5
 docopt==0.6.2
 frozenlist==1.4.1
 gidgethub==5.3.0
-idna==3.6
+idna==3.7
 irc3==1.1.10
 limnoria==2023.11.18
 multidict==6.0.5
