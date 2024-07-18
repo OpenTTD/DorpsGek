@@ -18,7 +18,7 @@ openttd-helpers==1.4.0
 pycparser==2.22
 PyJWT==2.8.0
 PyYAML==6.0.1
-sentry-sdk==2.7.1
+sentry-sdk==2.8.0
 uritemplate==4.1.1
 urllib3==2.2.2
 venusian==3.1.0
