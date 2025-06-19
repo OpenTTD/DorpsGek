@@ -20,6 +20,6 @@ PyJWT==2.10.1
 PyYAML==6.0.2
 sentry-sdk==2.30.0
 uritemplate==4.2.0
-urllib3==2.4.0
+urllib3==2.5.0
 venusian==3.1.1
 yarl==1.20.1
