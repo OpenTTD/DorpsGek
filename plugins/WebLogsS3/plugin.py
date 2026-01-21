@@ -11,7 +11,6 @@ from .render_list import render_list
 from .render_month import render_month
 from .render_year import render_year
 
-
 # Please change the "last modified" date below when making any changes to the CSS.
 INDEX_CSS = """
 body {
